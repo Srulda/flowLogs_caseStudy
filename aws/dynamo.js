@@ -11,7 +11,17 @@ const addItem = (tableName, item) => {
     return dynamoDb.put(params).promise();
 };
 
+const getItem = (tableName, id) => {
+    const params = {
+        TableName: tableName,
+        Key: {
+            id: id
+        }
+    };
+    return dynamoDb.get(params).promise();
+};
+
 module.exports = {
     addItem,
-    
+    getItem
 };

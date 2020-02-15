@@ -9,8 +9,6 @@ const getLogEvents = (logGroupName, size) => {
                 logStreamName: 'eni-0c527db942849058b-all',
                 limit: size,
                 startFromHead: true
-                
-
             },
             function(err, data) {
                 if (err) reject(err);
