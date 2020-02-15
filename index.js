@@ -10,10 +10,7 @@ exports.handler = async event => {
         const id = shortid.generate();
 
         const data = await getLogEvents(logGroupName, size);
-        let { events } = data;
-        if (!events) {
-            events = [];
-        }
+        let { events } = data || [];
 
         const s3FileName = `flow-logs-${id}.zip`;
         const bucketData = await uploadS3Zip(s3Bucket, s3FileName, events);
