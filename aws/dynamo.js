@@ -21,7 +21,26 @@ const getItem = (tableName, id) => {
     return dynamoDb.get(params).promise();
 };
 
+const updateItem = (tableName, id, timeStamp) => {
+    const params = {
+        TableName: tableName,
+        Key: {
+            id: id
+        },
+        AttributeUpdates: {
+            newestLogTime: {
+                Action: 'PUT',
+                Value: timeStamp
+            }
+        }
+    };
+    return dynamoDb.update(params).promise();
+};
+
+// const createTimeStamp = await addItem(tableName, { id : 'NEWEST_TIME_STAMP_LOG' , newestLogTime });
+
 module.exports = {
     addItem,
-    getItem
+    getItem,
+    updateItem
 };
